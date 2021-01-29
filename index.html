@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" onkeypress="jump()" onclick="jump()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mario.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="character"><img id="sas" src="sasuke.gif"></div>
+        <div id="block"><img id="pi" src="pika.gif"></div>
+        <img id="bird1" src="bird1.gif" alt="bird1">
+        <img id="bird2" src="bird2.gif" alt="bird2">
+        <audio id="musii">
+            <source src="bgmusic.mp3" type="audio/mpeg">
+        </audio>
+        
+    </div>
+    
+    <script>
+        var bgmusic = new Audio('bgmusic.mp3');
+        var gameover = new Audio('gameover.mp3');
+        var character = document.getElementById('sas');
+        var block = document.getElementById('pi');
+        function jump()
+        { 
+            character.classList.add("animate");
+            var audio = new Audio('jump.mp3');
+            audio.play();
+            bgmusic.play();
+            setTimeout(function()
+            {
+                character.classList.remove("animate");
+            },500);
+        }
+        var score=0;
+        setInterval(function()
+        {
+            var characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+            var blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+            score++;
+            
+            if(blockLeft>50 && blockLeft< 190 && characterTop>=390)
+            {  
+                setTimeout(function()
+                {
+                    alert(`You Lose!! Your Total Score is: ${score}`);
+                    block.style.animation="none";
+                    block.style.display="none";
+                    character.style.display="none";
+                });
+                gameover.play();
+                bgmusic.pause();
+                
+            }
+           
+        },10);
+
+    </script>
+    
+</body>
+</html>
