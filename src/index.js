@@ -8,4 +8,7 @@ static_path = path.join(__dirname,"../public");
 
 app.use(express.static(static_path));
 
-app.listen(3000);
+app.listen(port,()=>
+{
+   console.log(`Listening to the port ${port}`);
+});
